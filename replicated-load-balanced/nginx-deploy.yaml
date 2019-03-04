@@ -1,8 +1,11 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-ssl
 spec:
+  selector:
+    matchLabels:
+      app: nginx-ssl
   replicas: 4
   template:
     metadata:
@@ -22,9 +25,9 @@ spec:
       volumes:
       - name: conf
         configMap:
-          # This is the ConfigMap for nginx we created previously
+          # 前に作成したnginx向けのConfigMap
           name: nginx-conf
       - name: certs
         secret:
-          # This is the secret we created above
+          # 直前に作ったSecret
           secretName: ssl

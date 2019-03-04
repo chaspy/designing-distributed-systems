@@ -12,25 +12,26 @@ import (
 var (
 	user   = flag.String("user", "", "The database user name")
 	passwd = flag.String("password", "", "The database password")
-	db     = flag.String("database", "", "The database to connect to")
+	dtbs   = flag.String("database", "", "The database to connect to")
 	query  = flag.String("query", "", "The test query")
 	addr   = flag.String("address", "localhost:8080", "The address to listen on")
 )
 
-// Basic usage:
-//   db-check --query="SELECT * from my-cool-table" \
-//            --user=bdburns \
-//            --passwd="you wish"
+// 使用方法:
+//   db-check -query="SELECT * from my-cool-table" \
+//            -user=bdburns \
+//            -password="you wish"
+//            -database=dbname
 //
 func main() {
 	flag.Parse()
-	db, err := sql.Open("localhost", fmt.Sprintf("%s:%s@/%s", *user, *passwd, *db))
+	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@/%s", *user, *passwd, *dtbs))
 	if err != nil {
 		fmt.Printf("Error opening database: %v", err)
 	}
 
-	// Simple web handler that runs the query
-	http.HandleFunc("", func(res http.ResponseWriter, req *http.Request) {
+	// クエリを実行するシンプルなWebハンドラ
+	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
 		_, err := db.Exec(*query)
 		if err != nil {
 			res.WriteHeader(http.StatusInternalServerError)
@@ -41,6 +42,6 @@ func main() {
 		res.Write([]byte("OK"))
 		return
 	})
-	// Startup the server
+	// サーバを起動
 	http.ListenAndServe(*addr, nil)
 }

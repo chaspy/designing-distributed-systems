@@ -10,4 +10,4 @@ spec:
     name: memcache
   clusterIP: None
   selector:
-    app: memecache
+    app: memcache

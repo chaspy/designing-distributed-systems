@@ -1,4 +1,4 @@
-# This is the 'experiment' service
+# こちらがexperimentサービス
 apiVersion: v1
 kind: Service
 metadata:
@@ -10,10 +10,10 @@ spec:
   - port: 80
     name: web
   selector:
-    # Change this selector to match your application's labels
+    # アプリケーションのラベルに合わせてこのセレクタを変更
     app: experiment
 ---
-# This is the 'prod' service
+# こちらがwebサービス
 apiVersion: v1
 kind: Service
 metadata:
@@ -25,5 +25,5 @@ spec:
   - port: 80
     name: web
   selector:
-    # Change this selector to match your application's labels
+    # アプリケーションのラベルに合わせてこのセレクタを変更
     app: web

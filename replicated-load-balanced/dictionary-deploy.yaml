@@ -1,8 +1,11 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: dictionary-server
 spec:
+  selector:
+    matchLabels:
+      app: dictionary-server
   replicas: 3
   template:
     metadata:
@@ -16,7 +19,7 @@ spec:
         - containerPort: 8080
         readinessProbe:
           httpGet:
-            path: /ready
+            path: /readyz
             port: 8080
           initialDelaySeconds: 5
           periodSeconds: 5

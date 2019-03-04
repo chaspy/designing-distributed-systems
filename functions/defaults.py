@@ -1,13 +1,13 @@
-# Simple handler function for adding default values
+# デフォルト値で埋めるシンプルなハンドラ関数
 def handler(context):
-  # Get the input value
+  # 入力値を取得
   obj = context.json
-  # If the 'name' field is not present, set it randomly
+  # nameフィールドがなかったら、ランダムな値をセット
   if obj.get("name", None) is None:
     obj["name"] = random_name()
-  # If the 'color' field is not present, set it to 'blue'
+  # colorフィールドがなかったら、blueをセット
   if obj.get("color", None) is None:
     obj["color"] = "blue"
-  # Call the actual API, potentially with the new default
-  # values, and return the result
+  # 新しいデフォルト値込みで、実際のAPIを呼び出し、
+  # 結果をreturn
   return call_my_api(obj)

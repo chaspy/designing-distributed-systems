@@ -1,13 +1,16 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: shared-twemproxy
+  name: sharded-twemproxy
 spec:
+  selector:
+    matchLabels:
+      app: sharded-twemproxy
   replicas: 3
   template:
     metadata:
       labels:
-        app: shared-twemproxy
+        app: sharded-twemproxy
     spec:
       containers:
       - name: twemproxy
@@ -19,4 +22,4 @@ spec:
       volumes:
       - name: config-volume
         configMap:
-          name: shared-twem-config
+          name: sharded-twem-config

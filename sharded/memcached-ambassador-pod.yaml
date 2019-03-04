@@ -4,10 +4,10 @@ metadata:
   name: sharded-memcache-ambassador
 spec:
   containers:
-    # This is where the application container would go, for example
+    # ここにアプリケーションコンテナの設定を入れる。以下は例
     # - name: nginx
     #   image: nginx
-    # This is the ambassador container
+    # これ以降アンバサダコンテナの設定
     - name: twemproxy
       image: ganomede/twemproxy
       command: [ "nutcracker", "-c", "/etc/config/nutcracker.yaml", "-v", "7", "-s", "6222" ]

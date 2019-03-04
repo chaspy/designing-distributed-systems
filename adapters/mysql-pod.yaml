@@ -7,5 +7,6 @@ spec:
   containers:
   - image: mysql
     name: mysql
+  # imageは自分で作ったコンテナイメージに置き換え
   - image: brendanburns/mysql-adapter
     name: adapter

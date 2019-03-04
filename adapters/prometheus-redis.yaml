@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
   - image: redis
-    name: redis 
- # Provide an adapter that implements the Prometheus interface
+    name: redis
+  # Prometheusのインタフェイスを持つアダプタを指定
   - image: oliver006/redis_exporter
     name: adapter

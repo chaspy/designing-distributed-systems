@@ -1,14 +1,14 @@
-import twillio
+import twilio
 
 def two_factor(context):
-  # Generate a random six digit code
+  # ランダムな6桁のコードを生成
   code = random.randint(100000, 999999)
-  
-  # Register the code with the login service
+
+  # ログインサービスにコードを登録
   user = context.json["user"]
   register_code_with_login_service(user, code)
-  
-  # Use the twillio library to send texts
+
+  # テキストメッセージの送信にTwilioのライブラリを使用
   account = "my-account-sid"
   token = "my-token"
   client = twilio.rest.Client(account, token)

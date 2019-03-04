@@ -1,8 +1,11 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: sharded-memcache
+  name: memcache
 spec:
+  selector:
+    matchLabels:
+      app: memcache
   serviceName: "memcache"
   replicas: 3
   template:
